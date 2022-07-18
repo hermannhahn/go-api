@@ -52,6 +52,10 @@ func CreateProduct(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	if err := models.ValidadeProduct(&product); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 	database.DB.Create(&product)
 	c.JSON(http.StatusOK, product)
 }
@@ -75,6 +79,10 @@ func UpdateProduct(c *gin.Context) {
 	id := c.Param("id")
 	database.DB.First(&product, id)
 	if err := c.ShouldBindJSON(&product); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := models.ValidadeProduct(&product); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

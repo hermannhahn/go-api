@@ -11,11 +11,11 @@ import (
 func HandleRequests() {
 	database.Connect()
 	r := gin.Default()
-	r.GET("/products/all", controllers.ShowProducts)
-	r.GET("/products/search/:query", controllers.SearchProducts)
-	r.GET("/product/show/:id", controllers.ShowProduct)
-	r.POST("/product/new", controllers.CreateProduct)
-	r.DELETE("/product/delete/:id", controllers.DeleteProduct)
-	r.PATCH("/product/update/:id", controllers.UpdateProduct)
+	r.GET("/products", controllers.ShowProducts)
+	r.GET("/products/s/:query", controllers.SearchProducts)
+	r.GET("/products/:id", controllers.ShowProduct)
+	r.POST("/products", controllers.CreateProduct)
+	r.DELETE("/products/:id", controllers.DeleteProduct)
+	r.PATCH("/products/:id", controllers.UpdateProduct)
 	r.Run(":8080")
 }
