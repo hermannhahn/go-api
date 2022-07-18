@@ -1,7 +1,8 @@
 {
-    "DbUsername": "",
-    "DbPassword": "",
-    "DbPort": "",
-    "DbHost": "",
-    "DbName": ""
+    "DbUsername": "postgres",
+    "DbPassword": "postgres",
+    "DbHost": "localhost",
+    "DbPort": "5432",
+    "DbName": "go-api",
+    "DbTimezone": "UTC"
 }

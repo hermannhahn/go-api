@@ -1,5 +1,7 @@
 package models
 
+import "gorm.io/gorm"
+
 // Configuration is the configuration for the database application
 type Configuration struct {
 	DbUsername string
@@ -11,13 +13,13 @@ type Configuration struct {
 
 // Product struct
 type Product struct {
-	ID          string
-	Name        string
-	Description string
-	Image       string
-	Price       float64
-	Quantity    int
-	Active      bool
+	gorm.Model
+	Name        string  `json:"name"`
+	Description string  `json:"description"`
+	Image       string  `json:"image"`
+	Price       float64 `json:"price"`
+	Quantity    int     `json:"quantity"`
+	Active      bool    `json:"active"`
 }
 
 // Products is a slice of Product
