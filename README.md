@@ -31,8 +31,16 @@ Simple API-REST running tasks on the PostgreSQL database.
             "active": "true or false"
         }
     
-    Show all products
+    Delete product
 	DELETE -> /products/:id
     
-    Show all products
+    Update product
 	PATCH -> /products/:id
+        {
+            "name": "PRODUCT NAME",
+            "description": "PRODUCT DESCRIPTION",
+            "image": "IMAGE URL",
+            "price": FLOAT,
+            "quantity": INT,
+            "active": "true or false"
+        }
