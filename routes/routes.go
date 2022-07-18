@@ -15,7 +15,7 @@ func HandleRequests() {
 	router.GET("/products/search/:query", controllers.SearchProducts)
 	router.GET("/product/show/:id", controllers.ShowProduct)
 	router.POST("/product/new", controllers.CreateProduct)
-	router.POST("/product/delete/:id", controllers.DeleteProduct)
+	router.DELETE("/product/delete/:id", controllers.DeleteProduct)
 	router.POST("/product/update/:id", controllers.UpdateProduct)
 	router.Run(":8080")
 }

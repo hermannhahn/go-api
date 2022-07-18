@@ -20,6 +20,10 @@ func ShowProduct(c *gin.Context) {
 	var product models.Product
 	id := c.Param("id")
 	database.DB.First(&product, id)
+	if product.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
+		return
+	}
 	c.JSON(http.StatusOK, product)
 }
 
@@ -47,6 +51,10 @@ func DeleteProduct(c *gin.Context) {
 	var product models.Product
 	id := c.Param("id")
 	database.DB.First(&product, id)
+	if product.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
+		return
+	}
 	database.DB.Delete(&product)
 	c.JSON(http.StatusOK, gin.H{"data": product})
 }
