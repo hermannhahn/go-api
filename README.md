@@ -1,2 +1,3 @@
 # go-api-gin
-api gin pg
+
+Simple API-REST in Go getting data from PostgreSQL.
