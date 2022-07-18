@@ -10,5 +10,7 @@ import (
 func HandleRequests() {
 	router := gin.Default()
 	router.GET("/products/all", controllers.ShowProducts)
+	router.GET("/products/show/:id", controllers.ShowProduct)
+	router.GET("/products/search/:query", controllers.SearchProducts)
 	router.Run(":8080")
 }
