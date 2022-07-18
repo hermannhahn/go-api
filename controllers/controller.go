@@ -27,11 +27,21 @@ func ShowProduct(c *gin.Context) {
 	c.JSON(http.StatusOK, product)
 }
 
-// SearchProducts is a function that returns a list of products with a search term
+// SearchProducts is a function that returns a list of products with a search term [name or description or price]
 func SearchProducts(c *gin.Context) {
 	products := models.Products{}
 	search := c.Param("query")
 	database.DB.Where("name LIKE ?", "%"+search+"%").Find(&products)
+	if len(products) == 0 {
+		database.DB.Where("description LIKE ?", "%"+search+"%").Find(&products)
+		if len(products) == 0 {
+			database.DB.Where("price LIKE ?", "%"+search+"%").Find(&products)
+			if len(products) == 0 {
+				c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
+				return
+			}
+		}
+	}
 	c.JSON(http.StatusOK, products)
 }
 
