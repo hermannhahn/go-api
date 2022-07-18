@@ -10,12 +10,12 @@ import (
 // HandleRequests is a function that handles all requests
 func HandleRequests() {
 	database.Connect()
-	router := gin.Default()
-	router.GET("/products/all", controllers.ShowProducts)
-	router.GET("/products/search/:query", controllers.SearchProducts)
-	router.GET("/product/show/:id", controllers.ShowProduct)
-	router.POST("/product/new", controllers.CreateProduct)
-	router.DELETE("/product/delete/:id", controllers.DeleteProduct)
-	router.POST("/product/update/:id", controllers.UpdateProduct)
-	router.Run(":8080")
+	r := gin.Default()
+	r.GET("/products/all", controllers.ShowProducts)
+	r.GET("/products/search/:query", controllers.SearchProducts)
+	r.GET("/product/show/:id", controllers.ShowProduct)
+	r.POST("/product/new", controllers.CreateProduct)
+	r.DELETE("/product/delete/:id", controllers.DeleteProduct)
+	r.PATCH("/product/update/:id", controllers.UpdateProduct)
+	r.Run(":8080")
 }
