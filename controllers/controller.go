@@ -12,7 +12,9 @@ import (
 func ShowProducts(c *gin.Context) {
 	products := models.Products{}
 	database.DB.Find(&products)
-	c.JSON(http.StatusOK, gin.H{"data": products})
+	c.JSON(http.StatusOK, gin.H{
+		"message": "List of products",
+		"data":    products})
 }
 
 // ShowProduct is a function that returns a product
@@ -24,7 +26,9 @@ func ShowProduct(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
 		return
 	}
-	c.JSON(http.StatusOK, product)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Returning product values for id: " + id,
+		"data":    product})
 }
 
 // SearchProducts is a function that returns a list of products with a search term [name or description or price]
@@ -42,7 +46,9 @@ func SearchProducts(c *gin.Context) {
 			}
 		}
 	}
-	c.JSON(http.StatusOK, products)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "List of products",
+		"data":    products})
 }
 
 // CreateProduct is a function that creates a product
@@ -57,7 +63,9 @@ func CreateProduct(c *gin.Context) {
 		return
 	}
 	database.DB.Create(&product)
-	c.JSON(http.StatusOK, product)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "New product created",
+		"data":    product})
 }
 
 // DeleteProduct is a function that deletes a product
@@ -70,7 +78,9 @@ func DeleteProduct(c *gin.Context) {
 		return
 	}
 	database.DB.Delete(&product)
-	c.JSON(http.StatusOK, gin.H{"data": product})
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Product ID: " + id + " deleted",
+		"data":    product})
 }
 
 // UpdateProduct is a function that updates a product
@@ -87,5 +97,7 @@ func UpdateProduct(c *gin.Context) {
 		return
 	}
 	database.DB.Save(&product)
-	c.JSON(http.StatusOK, product)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Product id: " + id + " updated",
+		"data":    product})
 }
