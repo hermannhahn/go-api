@@ -13,7 +13,7 @@ func ShowProducts(c *gin.Context) {
 	products := models.Products{}
 	database.DB.Find(&products)
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Returning a slice of products",
+		"message": "Returning all products",
 		"data":    products})
 }
 

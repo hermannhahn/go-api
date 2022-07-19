@@ -19,9 +19,9 @@ type Product struct {
 	gorm.Model
 	Name        string  `json:"name" validate:"nonzero"`
 	Description string  `json:"description"`
-	Image       string  `json:"image" validate:"regexp=^(http|https):\\/\\/[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$"`
-	Price       float64 `json:"price" validate:"nonzero, regexp=^[0-9]+(\\.[0-9]{1,2})?$"`
-	Quantity    int     `json:"quantity" validate:"regexp=^[0-9]+$"`
+	Image       string  `json:"image" validate:"regexp=^(http|https):\\/\\/.*$"`
+	Price       float64 `json:"price" validate:"nonzero"`
+	Quantity    int     `json:"quantity"`
 	Active      bool    `json:"active"`
 }
 
