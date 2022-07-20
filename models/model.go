@@ -12,7 +12,13 @@ type Configuration struct {
 	DbPort     string
 	DbHost     string
 	DbName     string
-	APIKey     string
+}
+
+// APIConfiguration for the API application
+type APIConfiguration struct {
+	APIKey string
+	Domain string
+	Port   string
 }
 
 // Product struct

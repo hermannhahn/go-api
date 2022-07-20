@@ -4,8 +4,6 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
-	"fmt"
-
 	"github.com/hermannhahn/go-api-gin/models"
 
 	"github.com/tkanos/gonfig"
@@ -17,21 +15,25 @@ var (
 	err error
 )
 
-// GetConfig returns the configuration for the application
-func GetConfig(params ...string) models.Configuration {
+// DBConfig returns the configuration for the database
+func DBConfig() models.Configuration {
 	configuration := models.Configuration{}
-	env := "dev"
-	if len(params) > 0 {
-		env = params[0]
-	}
-	fileName := fmt.Sprintf("./%s_config.json", env)
+	fileName := "db_config.json"
+	gonfig.GetConf(fileName, &configuration)
+	return configuration
+}
+
+// APIConfig returns the configuration for the API
+func APIConfig() models.APIConfiguration {
+	configuration := models.APIConfiguration{}
+	fileName := "api_config.json"
 	gonfig.GetConf(fileName, &configuration)
 	return configuration
 }
 
 // Connect returns a connection to the database
 func Connect() {
-	config := GetConfig("db")
+	config := DBConfig()
 	dsn := "host=" + config.DbHost + " user=" + config.DbUsername + " password=" + config.DbPassword + " dbname=" + config.DbName + " port=" + config.DbPort + " sslmode=disable"
 	con, err := gorm.Open(postgres.Open(dsn))
 	if err != nil {

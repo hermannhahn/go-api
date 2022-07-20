@@ -1,3 +1,5 @@
 {
-    "APIKey": "my-api-key"
+    "APIKey": "my-api-key",
+    "Domain": "http://localhost",
+    "Port": "8080"
 }
