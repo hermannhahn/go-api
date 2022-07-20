@@ -70,6 +70,29 @@ paths:
       summary: List all products
       tags:
       - /api/products
+    post:
+      consumes:
+      - application/json
+      description: creates a new product
+      parameters:
+      - description: Product
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/models.Product'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Create a new product
   /api/products/{id}:
     delete:
       consumes:
@@ -161,28 +184,4 @@ paths:
           schema:
             $ref: '#/definitions/models.Response'
       summary: Search products by name, description or price
-  /products:
-    post:
-      consumes:
-      - application/json
-      description: creates a new product
-      parameters:
-      - description: Product
-        in: body
-        name: product
-        required: true
-        schema:
-          $ref: '#/definitions/models.Product'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.Response'
-      summary: Create a new product
 swagger: "2.0"

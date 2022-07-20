@@ -86,7 +86,7 @@ func SearchProducts(c *gin.Context) {
 // @Param product body models.Product true "Product"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
-// @Router /products [post]
+// @Router /api/products [post]
 func CreateProduct(c *gin.Context) {
 	var product models.Product
 	if err := c.ShouldBindJSON(&product); err != nil {
