@@ -57,7 +57,7 @@ info:
   title: Simple Rest API
   version: "1.0"
 paths:
-  /products:
+  /api/products:
     get:
       description: returns message and a list of products
       produces:
@@ -68,30 +68,9 @@ paths:
           schema:
             $ref: '#/definitions/models.ResponseList'
       summary: List all products
-    post:
-      consumes:
-      - application/json
-      description: creates a new product
-      parameters:
-      - description: Product
-        in: body
-        name: product
-        required: true
-        schema:
-          $ref: '#/definitions/models.Product'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.Response'
-      summary: Create a new product
-  /products/{id}:
+      tags:
+      - /api/products
+  /api/products/{id}:
     delete:
       consumes:
       - application/json
@@ -159,7 +138,7 @@ paths:
           schema:
             $ref: '#/definitions/models.Response'
       summary: Update a product
-  /products/s/{query}:
+  /api/products/s/{query}:
     get:
       consumes:
       - application/json
@@ -182,4 +161,28 @@ paths:
           schema:
             $ref: '#/definitions/models.Response'
       summary: Search products by name, description or price
+  /products:
+    post:
+      consumes:
+      - application/json
+      description: creates a new product
+      parameters:
+      - description: Product
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/models.Product'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Create a new product
 swagger: "2.0"

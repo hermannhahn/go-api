@@ -15,9 +15,10 @@ import (
 // ShowProducts godoc
 // @Summary List all products
 // @Description returns message and a list of products
+// @Tags /api/products
 // @Produce json
 // @Success 200 {object} models.ResponseList
-// @Router /products [get]
+// @Router /api/products [get]
 func ShowProducts(c *gin.Context) {
 	docs.SwaggerInfo.BasePath = "/products"
 	products := models.Products{}
@@ -35,7 +36,7 @@ func ShowProducts(c *gin.Context) {
 // @Param id path string true "Product ID"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
-// @Router /products/{id} [get]
+// @Router /api/products/{id} [get]
 func ShowProduct(c *gin.Context) {
 	var product models.Product
 	id := c.Param("id")
@@ -57,7 +58,7 @@ func ShowProduct(c *gin.Context) {
 // @Param query path string true "Search term"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
-// @Router /products/s/{query} [get]
+// @Router /api/products/s/{query} [get]
 func SearchProducts(c *gin.Context) {
 	products := models.Products{}
 	search := c.Param("query")
@@ -110,7 +111,7 @@ func CreateProduct(c *gin.Context) {
 // @Param id path string true "Product ID"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
-// @Router /products/{id} [delete]
+// @Router /api/products/{id} [delete]
 func DeleteProduct(c *gin.Context) {
 	var product models.Product
 	id := c.Param("id")
@@ -133,7 +134,7 @@ func DeleteProduct(c *gin.Context) {
 // @Param product body models.Product true "Product"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
-// @Router /products/{id} [patch]
+// @Router /api/products/{id} [patch]
 func UpdateProduct(c *gin.Context) {
 	var product models.Product
 	id := c.Param("id")

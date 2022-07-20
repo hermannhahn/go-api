@@ -23,4 +23,5 @@ func main() {
 	println("API documentation: http://localhost:8080/api/")
 	docs.SwaggerInfo.BasePath = "/"
 	routes.HandleRequests()
+	println("API started.")
 }

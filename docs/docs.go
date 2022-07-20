@@ -20,11 +20,14 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/products": {
+        "/api/products": {
             "get": {
                 "description": "returns message and a list of products",
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "/api/products"
                 ],
                 "summary": "List all products",
                 "responses": {
@@ -35,44 +38,9 @@ const docTemplate = `{
                         }
                     }
                 }
-            },
-            "post": {
-                "description": "creates a new product",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "Create a new product",
-                "parameters": [
-                    {
-                        "description": "Product",
-                        "name": "product",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Product"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.Response"
-                        }
-                    }
-                }
             }
         },
-        "/products/s/{query}": {
+        "/api/products/s/{query}": {
             "get": {
                 "description": "returns message and a list of products",
                 "consumes": [
@@ -107,7 +75,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/products/{id}": {
+        "/api/products/{id}": {
             "get": {
                 "description": "returns message and a product",
                 "consumes": [
@@ -183,6 +151,43 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "summary": "Update a product",
+                "parameters": [
+                    {
+                        "description": "Product",
+                        "name": "product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "post": {
+                "description": "creates a new product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Create a new product",
                 "parameters": [
                     {
                         "description": "Product",
