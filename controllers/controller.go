@@ -101,3 +101,11 @@ func UpdateProduct(c *gin.Context) {
 		"message": "Product ID: " + id + " updated",
 		"data":    product})
 }
+
+// ShowIndex is a function that returns the index page
+func ShowIndex(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"title":   "Gin web framework",
+		"welcome": "Welcome to the Go API GIN!",
+	})
+}

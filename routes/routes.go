@@ -11,6 +11,8 @@ import (
 func HandleRequests() {
 	database.Connect()
 	r := gin.Default()
+	r.LoadHTMLGlob("templates/*")
+	r.GET("/", controllers.ShowIndex)
 	r.GET("/products", controllers.ShowProducts)
 	r.GET("/products/s/:query", controllers.SearchProducts)
 	r.GET("/products/:id", controllers.ShowProduct)

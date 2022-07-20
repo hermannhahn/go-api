@@ -34,6 +34,12 @@ type Response struct {
 	Data    Product `json:"data"`
 }
 
+// ResponseList is the response list for the API
+type ResponseList struct {
+	Message string   `json:"message"`
+	Data    Products `json:"data"`
+}
+
 // ValidadeProduct validates the product
 func ValidadeProduct(product *Product) error {
 	if err := validator.Validate(product); err != nil {

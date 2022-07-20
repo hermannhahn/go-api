@@ -37,17 +37,11 @@ func TestAPI(t *testing.T) {
 
 func CreateTestProduct(t *testing.T) {
 	// Create a new product for testing
-	product, _ := json.Marshal(map[string]interface{}{
-		"Name":        "TestProduct",
-		"Description": "TestDescription",
-		"Price":       1.1,
-		"Quantity":    1,
-		"Image":       "http://test.com/test.jpg",
-		"Active":      true,
-	})
+	product := models.Product{Name: "TestProduct", Description: "TestDescription", Price: 1.1, Quantity: 1, Image: "http://test.com/test.jpg", Active: true}
+	newProduct, _ := json.Marshal(product)
 	r := SetupTestRoutes()
 	r.POST("/products", controllers.CreateProduct)
-	req, _ := http.NewRequest("POST", "/products", bytes.NewBuffer(product))
+	req, _ := http.NewRequest("POST", "/products", bytes.NewBuffer(newProduct))
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
 	assert.Equal(t, http.StatusOK, w.Code, "Should return 200")
