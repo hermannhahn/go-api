@@ -31,12 +31,8 @@ func getConfig(params ...string) models.Configuration {
 
 // Connect returns a connection to the database
 func Connect() {
-	user := getConfig("db").DbUsername
-	pass := getConfig("db").DbPassword
-	host := getConfig("db").DbHost
-	name := getConfig("db").DbName
-	port := getConfig("db").DbPort
-	dsn := "host=" + host + " user=" + user + " password=" + pass + " dbname=" + name + " port=" + port + " sslmode=disable"
+	config := getConfig("db")
+	dsn := "host=" + config.DbHost + " user=" + config.DbUsername + " password=" + config.DbPassword + " dbname=" + config.DbName + " port=" + config.DbPort + " sslmode=disable"
 	con, err := gorm.Open(postgres.Open(dsn))
 	if err != nil {
 		panic(err)
