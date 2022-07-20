@@ -1,3 +1,4 @@
+// dev: github.com/hermannhahn
 package models
 
 import (
