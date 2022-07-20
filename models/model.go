@@ -36,8 +36,8 @@ type Response struct {
 
 // ResponseList is the response list for the API
 type ResponseList struct {
-	Message string   `json:"message"`
-	Data    Products `json:"data"`
+	Message string    `json:"message"`
+	Data    []Product `json:"data"`
 }
 
 // ValidadeProduct validates the product

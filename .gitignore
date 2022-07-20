@@ -18,3 +18,4 @@ db_config.json
 postgres-data/
 migration/
 .gitignore
+.notes

@@ -4,6 +4,9 @@ import (
 	"go-api-gin/controllers"
 	"go-api-gin/database"
 
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,6 +15,7 @@ func HandleRequests() {
 	database.Connect()
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/*")
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.GET("/", controllers.ShowIndex)
 	r.GET("/products", controllers.ShowProducts)
 	r.GET("/products/s/:query", controllers.SearchProducts)

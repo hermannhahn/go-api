@@ -2,22 +2,40 @@ package controllers
 
 import (
 	"go-api-gin/database"
+	"go-api-gin/docs"
 	"go-api-gin/models"
+
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-// ShowProducts is a function that returns a list of products
+// @BasePath /products
+
+// ShowProducts godoc
+// @Summary List all products
+// @Description returns message and a list of products
+// @Produce json
+// @Success 200 {object} models.ResponseList
+// @Router /products [get]
 func ShowProducts(c *gin.Context) {
-	products := models.Products{}
+	docs.SwaggerInfo.BasePath = "/products"
+	products := models.Product{}
 	database.DB.Find(&products)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Returning all products",
 		"data":    products})
 }
 
-// ShowProduct is a function that returns a product
+// ShowProduct godoc
+// @Summary Get product by ID
+// @Description returns message and a product
+// @Accept json
+// @Produce json
+// @Param id path string true "Product ID"
+// @Success 200 {object} models.Response
+// @Failure 400 {object} models.Response
+// @Router /products/{id} [get]
 func ShowProduct(c *gin.Context) {
 	var product models.Product
 	id := c.Param("id")
@@ -31,7 +49,15 @@ func ShowProduct(c *gin.Context) {
 		"data":    product})
 }
 
-// SearchProducts is a function that returns a list of products with a search term [name or description or price]
+// SearchProducts godoc
+// @Summary Search products by name, description or price
+// @Description returns message and a list of products
+// @Accept json
+// @Produce json
+// @Param query path string true "Search term"
+// @Success 200 {object} models.Response
+// @Failure 400 {object} models.Response
+// @Router /products/s/{query} [get]
 func SearchProducts(c *gin.Context) {
 	products := models.Products{}
 	search := c.Param("query")
@@ -51,7 +77,15 @@ func SearchProducts(c *gin.Context) {
 		"data":    products})
 }
 
-// CreateProduct is a function that creates a product
+// CreateProduct godoc
+// @Summary Create a new product
+// @Description creates a new product
+// @Accept json
+// @Produce json
+// @Param product body models.Product true "Product"
+// @Success 200 {object} models.Response
+// @Failure 400 {object} models.Response
+// @Router /products [post]
 func CreateProduct(c *gin.Context) {
 	var product models.Product
 	if err := c.ShouldBindJSON(&product); err != nil {
@@ -68,7 +102,15 @@ func CreateProduct(c *gin.Context) {
 		"data":    product})
 }
 
-// DeleteProduct is a function that deletes a product
+// DeleteProduct godoc
+// @Summary Delete a product
+// @Description deletes a product
+// @Accept json
+// @Produce json
+// @Param id path string true "Product ID"
+// @Success 200 {object} models.Response
+// @Failure 400 {object} models.Response
+// @Router /products/{id} [delete]
 func DeleteProduct(c *gin.Context) {
 	var product models.Product
 	id := c.Param("id")
@@ -83,7 +125,15 @@ func DeleteProduct(c *gin.Context) {
 		"data":    product})
 }
 
-// UpdateProduct is a function that updates a product
+// UpdateProduct godoc
+// @Summary Update a product
+// @Description updates a product
+// @Accept json
+// @Produce json
+// @Param product body models.Product true "Product"
+// @Success 200 {object} models.Response
+// @Failure 400 {object} models.Response
+// @Router /products/{id} [patch]
 func UpdateProduct(c *gin.Context) {
 	var product models.Product
 	id := c.Param("id")
@@ -102,7 +152,7 @@ func UpdateProduct(c *gin.Context) {
 		"data":    product})
 }
 
-// ShowIndex is a function that returns the index page
+// ShowIndex is the index page
 func ShowIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"title":   "Gin web framework",

@@ -8,33 +8,6 @@ Simple Rest API to learn Go Lang.
 2. Run > docker-compose up
 3. Run > go run .
 
-# Routes
+# Swagger
 
-    Show all products.
-    GET -> /products
-    
-    Search product by name, description or price.
-	GET -> /products/s/:query
-    
-    Show product by ID.
-	GET -> /products/:id
-    
-    Add new product
-	POST -> /products
-    
-    Delete product
-	DELETE -> /products/:id
-    
-    Update product
-	PATCH -> /products/:id
-
-# RAW
-
-    {
-        "name": "PRODUCT NAME",
-        "description": "PRODUCT DESCRIPTION",
-        "image": "URL",
-        "price": FLOAT,
-        "quantity": INT,
-        "active": "true or false"
-    }
+http://localhost:8080/swagger/index.html
