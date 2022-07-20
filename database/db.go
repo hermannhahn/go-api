@@ -18,7 +18,7 @@ var (
 )
 
 // GetConfig returns the configuration for the application
-func getConfig(params ...string) models.Configuration {
+func GetConfig(params ...string) models.Configuration {
 	configuration := models.Configuration{}
 	env := "dev"
 	if len(params) > 0 {
@@ -31,7 +31,7 @@ func getConfig(params ...string) models.Configuration {
 
 // Connect returns a connection to the database
 func Connect() {
-	config := getConfig("db")
+	config := GetConfig("db")
 	dsn := "host=" + config.DbHost + " user=" + config.DbUsername + " password=" + config.DbPassword + " dbname=" + config.DbName + " port=" + config.DbPort + " sslmode=disable"
 	con, err := gorm.Open(postgres.Open(dsn))
 	if err != nil {

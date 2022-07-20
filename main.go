@@ -20,7 +20,7 @@ func main() {
 	println("Starting API...")
 	println("Swagger documentation: http://localhost:8080/swagger/")
 	println("API: http://localhost:8080/api/")
+	println("API started.")
 	docs.SwaggerInfo.BasePath = "/"
 	routes.HandleRequests()
-	println("API started.")
 }

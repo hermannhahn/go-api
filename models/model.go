@@ -12,6 +12,7 @@ type Configuration struct {
 	DbPort     string
 	DbHost     string
 	DbName     string
+	APIKey     string
 }
 
 // Product struct
