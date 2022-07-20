@@ -27,7 +27,7 @@ func ShowProduct(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Returning product array for id: " + id,
+		"message": "Returning product data for id: " + id,
 		"data":    product})
 }
 
@@ -47,7 +47,7 @@ func SearchProducts(c *gin.Context) {
 		}
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Returning search results in a slice of products",
+		"message": "Returning results in a slice of products",
 		"data":    products})
 }
 
@@ -98,6 +98,6 @@ func UpdateProduct(c *gin.Context) {
 	}
 	database.DB.Save(&product)
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Product id: " + id + " updated",
+		"message": "Product ID: " + id + " updated",
 		"data":    product})
 }

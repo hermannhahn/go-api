@@ -1,95 +1,157 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"go-api-gin/controllers"
 	"go-api-gin/database"
 	"go-api-gin/models"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 )
 
-var ID int
+var ID string
+var IDINT int
+
+// before is a function to find the ID of the product created
+func between(value string, a string, b string) string {
+	// Get substring between two strings.
+	posFirst := strings.Index(value, a)
+	if posFirst == -1 {
+		return ""
+	}
+	posLast := strings.Index(value, b)
+	if posLast == -1 {
+		return ""
+	}
+	posFirstAdjusted := posFirst + len(a)
+	if posFirstAdjusted >= posLast {
+		return ""
+	}
+	return value[posFirstAdjusted:posLast]
+}
 
 // SetupTestRoutes is a function that returns a router with all routes
-func SetupTestRoutes(route string) *gin.Engine {
-	r := gin.Default()
-	gin.SetMode(gin.ReleaseMode)
+func SetupTestRoutes() *gin.Engine {
 	database.Connect()
-	if route == "products" {
-		r.GET("/products", controllers.ShowProducts)
-	}
-	if route == "product" {
-		r.GET("/products/:id", controllers.ShowProduct)
-	}
-	if route == "create" {
-		r.POST("/products", controllers.CreateProduct)
-	}
-	if route == "update" {
-		r.PATCH("/products/:id", controllers.UpdateProduct)
-	}
-	if route == "delete" {
-		r.DELETE("/products/:id", controllers.DeleteProduct)
-	}
-	if route == "search" {
-		r.GET("/products/s/:query", controllers.SearchProducts)
-	}
+	gin.SetMode(gin.ReleaseMode)
+	r := gin.Default()
 	return r
 }
 
-func TestStatusOK(t *testing.T) {
-	r := SetupTestRoutes("products")
+func TestAPI(t *testing.T) {
+	CreateTestProduct(t)
+	SearchTestProduct(t)
+	ShowTestProducts(t)
+	ShowTestProduct(t)
+	UpdateTestProduct(t)
+	DeleteTestProduct(t)
+	RemoveTestProductFromDataBase(t)
+}
+
+func CreateTestProduct(t *testing.T) {
+	// Create a new product for testing
+	product, _ := json.Marshal(map[string]interface{}{
+		"Name":        "TestProduct",
+		"Description": "TestDescription",
+		"Price":       1.1,
+		"Quantity":    1,
+		"Image":       "http://test.com/test.jpg",
+		"Active":      true,
+	})
+	r := SetupTestRoutes()
+	r.POST("/products", controllers.CreateProduct)
+	req, _ := http.NewRequest("POST", "/products", bytes.NewBuffer(product))
 	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+	assert.Equal(t, http.StatusOK, w.Code, "Should return 200")
+	assert.NotNil(t, w.Body, "Should return a body")
+	body := w.Body.String()
+	assert.Contains(t, body, "New product created", "Should return message 'New product created'")
+	ID = between(body, "ID\":", ",")
+}
+
+func SearchTestProduct(t *testing.T) {
+	r := SetupTestRoutes()
+	r.GET("/products/s/:query", controllers.SearchProducts)
+	req, _ := http.NewRequest("GET", "/products/s/TestProduct", nil)
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+	assert.Equal(t, http.StatusOK, w.Code, "Should return 200")
+	assert.NotNil(t, w.Body, "Should return a body")
+	body := w.Body.String()
+	assert.Contains(t, body, "Returning results in a slice of products", "Should return message 'Returning results in a slice of products'")
+}
+
+func ShowTestProducts(t *testing.T) {
+	// Try get list of products
+	r := SetupTestRoutes()
+	r.GET("/products", controllers.ShowProducts)
 	req, _ := http.NewRequest("GET", "/products", nil)
-	r.ServeHTTP(w, req)
-	assert.Equal(t, http.StatusOK, w.Code, "Status code should be 200")
-}
-
-func TestCreateMockProduct(t *testing.T) {
-	SetupTestRoutes("create")
-	product := models.Product{Name: "TestingCreateProduct", Description: "Test Description", Price: 1.1, Quantity: 1, Image: "http://test.com/test.jpg", Active: true}
-	database.DB.Create(&product)
-	ID = 0
-	assert.NotEqual(t, 0, product.ID, "Product not created. ID should not be 0")
-	ID = int(product.ID)
-}
-
-func TestUpdateMockProduct(t *testing.T) {
-	SetupTestRoutes("update")
-	var product models.Product
-	database.DB.First(&product, ID)
-	product.Name = "TestingUpdateProduct"
-	database.DB.Save(&product)
-	assert.Equal(t, "TestingUpdateProduct", product.Name, "Product not updated")
-}
-
-func TestSearchMockProduct(t *testing.T) {
-	r := SetupTestRoutes("search")
-	var product models.Product
-	database.DB.First(&product, ID)
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/products/s/TestingUpdateProduct", nil)
 	r.ServeHTTP(w, req)
-	assert.Equal(t, http.StatusOK, w.Code, "Status code should be 200")
+	assert.Equal(t, http.StatusOK, w.Code, "Should return 200")
+	assert.NotNil(t, w.Body, "Should return a body")
+	body := w.Body.String()
+	assert.Contains(t, body, "Returning all products", "Should return message 'Returning all products'")
 }
 
-func TestDeleteMockProduct(t *testing.T) {
-	SetupTestRoutes("delete")
-	var product models.Product
-	notDeleted := product.DeletedAt
-	database.DB.First(&product, ID)
-	database.DB.Delete(&product)
-	assert.NotEqual(t, notDeleted, product.DeletedAt, "Product not deleted")
+func ShowTestProduct(t *testing.T) {
+	// Try get the product
+	r := SetupTestRoutes()
+	r.GET("/products/:id", controllers.ShowProduct)
+	req, _ := http.NewRequest("GET", "/products/"+ID, nil)
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+	assert.Equal(t, http.StatusOK, w.Code, "Should return 200")
+	assert.NotNil(t, w.Body, "Should return a body")
+	body := w.Body.String()
+	assert.Contains(t, body, "Returning product data for id", "Should return message 'Returning product data for id...'")
 }
 
-func TestRemoveMockProductFromDatabase(t *testing.T) {
-	SetupTestRoutes("delete")
+func UpdateTestProduct(t *testing.T) {
+	// Update the product
+	r := SetupTestRoutes()
+	r.PATCH("/products/:id", controllers.UpdateProduct)
+	newName, _ := json.Marshal(map[string]interface{}{
+		"Name": "TestProductUpdated",
+	})
+	req, _ := http.NewRequest("PATCH", "/products/"+ID, bytes.NewBuffer(newName))
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+	assert.Equal(t, http.StatusOK, w.Code, "Should return 200")
+	assert.NotNil(t, w.Body, "Should return a body")
+	body := w.Body.String()
+	assert.Contains(t, body, "Product ID: "+ID+" updated", "Should return message 'Product ID: "+ID+" updated'")
+}
+
+func DeleteTestProduct(t *testing.T) {
+	// Delete the product
+	r := SetupTestRoutes()
+	r.DELETE("/products/:id", controllers.DeleteProduct)
+	req, _ := http.NewRequest("DELETE", "/products/"+ID, nil)
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+	assert.Equal(t, http.StatusOK, w.Code, "Should return 200")
+	assert.NotNil(t, w.Body, "Should return a body")
+	body := w.Body.String()
+	assert.Contains(t, body, "Product ID: "+ID+" deleted", "Should return message 'Product ID: "+ID+" deleted'")
+}
+
+func RemoveTestProductFromDataBase(t *testing.T) {
+	println("PASS: All tests passed")
+	println("Removing Test Product from Database")
 	var product models.Product
-	database.DB.Unscoped().First(&product, ID)
-	notDeleted := product.ID
+	database.DB.Unscoped().First(&product, IDINT)
+	notRemoved := product.ID
 	database.DB.Unscoped().Delete(&product)
-	assert.Equal(t, notDeleted, product.ID, "Product not removed from database")
+	assert.Equal(t, notRemoved, product.ID, "Product not removed from database")
+	println("")
+	println("PASS: Product removed from database.")
+	println("All tests executed successfully.")
 }

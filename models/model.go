@@ -28,6 +28,12 @@ type Product struct {
 // Products is a slice of Product
 type Products []Product // slice of products
 
+// Response is the response for the API
+type Response struct {
+	message string
+	data    []Product
+}
+
 // ValidadeProduct validates the product
 func ValidadeProduct(product *Product) error {
 	if err := validator.Validate(product); err != nil {
