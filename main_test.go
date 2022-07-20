@@ -8,7 +8,7 @@ import (
 	"go-api-gin/models"
 	"net/http"
 	"net/http/httptest"
-	"strings"
+	"strconv"
 	"testing"
 
 	"github.com/gin-gonic/gin"
@@ -16,25 +16,6 @@ import (
 )
 
 var ID string
-var IDINT int
-
-// before is a function to find the ID of the product created
-func between(value string, a string, b string) string {
-	// Get substring between two strings.
-	posFirst := strings.Index(value, a)
-	if posFirst == -1 {
-		return ""
-	}
-	posLast := strings.Index(value, b)
-	if posLast == -1 {
-		return ""
-	}
-	posFirstAdjusted := posFirst + len(a)
-	if posFirstAdjusted >= posLast {
-		return ""
-	}
-	return value[posFirstAdjusted:posLast]
-}
 
 // SetupTestRoutes is a function that returns a router with all routes
 func SetupTestRoutes() *gin.Engine {
@@ -71,9 +52,12 @@ func CreateTestProduct(t *testing.T) {
 	r.ServeHTTP(w, req)
 	assert.Equal(t, http.StatusOK, w.Code, "Should return 200")
 	assert.NotNil(t, w.Body, "Should return a body")
-	body := w.Body.String()
-	assert.Contains(t, body, "New product created", "Should return message 'New product created'")
-	ID = between(body, "ID\":", ",")
+	bodyString := w.Body.String()
+	assert.Contains(t, bodyString, "New product created", "Should return message 'New product created'")
+	var testProduct models.Response
+	bodyBytes := w.Body.Bytes()
+	json.Unmarshal([]byte(bodyBytes), &testProduct)
+	ID = strconv.FormatUint(uint64(testProduct.Data.ID), 10)
 }
 
 func SearchTestProduct(t *testing.T) {
@@ -147,10 +131,10 @@ func RemoveTestProductFromDataBase(t *testing.T) {
 	println("PASS: All tests passed")
 	println("Removing Test Product from Database")
 	var product models.Product
-	database.DB.Unscoped().First(&product, IDINT)
 	notRemoved := product.ID
+	database.DB.Unscoped().First(&product, ID)
 	database.DB.Unscoped().Delete(&product)
-	assert.Equal(t, notRemoved, product.ID, "Product not removed from database")
+	assert.NotEqual(t, notRemoved, product.ID, "Product not removed from database")
 	println("")
 	println("PASS: Product removed from database.")
 	println("All tests executed successfully.")

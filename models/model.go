@@ -30,8 +30,8 @@ type Products []Product // slice of products
 
 // Response is the response for the API
 type Response struct {
-	message string
-	data    []Product
+	Message string  `json:"message"`
+	Data    Product `json:"data"`
 }
 
 // ValidadeProduct validates the product
