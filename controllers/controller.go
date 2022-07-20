@@ -1,4 +1,3 @@
-// dev: github.com/hermannhahn
 package controllers
 
 import (
