@@ -31,6 +31,7 @@ func ShowProducts(c *gin.Context) {
 // ShowProduct godoc
 // @Summary Get product by ID
 // @Description returns message and a product
+// @Tags /api/products
 // @Accept json
 // @Produce json
 // @Param id path string true "Product ID"
@@ -53,6 +54,7 @@ func ShowProduct(c *gin.Context) {
 // SearchProducts godoc
 // @Summary Search products by name, description or price
 // @Description returns message and a list of products
+// @Tags /api/products
 // @Accept json
 // @Produce json
 // @Param query path string true "Search term"
@@ -81,6 +83,7 @@ func SearchProducts(c *gin.Context) {
 // CreateProduct godoc
 // @Summary Create a new product
 // @Description creates a new product
+// @Tags /api/products
 // @Accept json
 // @Produce json
 // @Param product body models.Product true "Product"
@@ -106,6 +109,7 @@ func CreateProduct(c *gin.Context) {
 // DeleteProduct godoc
 // @Summary Delete a product
 // @Description deletes a product
+// @Tags /api/products
 // @Accept json
 // @Produce json
 // @Param id path string true "Product ID"
@@ -129,6 +133,7 @@ func DeleteProduct(c *gin.Context) {
 // UpdateProduct godoc
 // @Summary Update a product
 // @Description updates a product
+// @Tags /api/products
 // @Accept json
 // @Produce json
 // @Param product body models.Product true "Product"

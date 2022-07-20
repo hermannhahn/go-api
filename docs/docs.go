@@ -47,6 +47,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "/api/products"
+                ],
                 "summary": "Create a new product",
                 "parameters": [
                     {
@@ -84,6 +87,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "/api/products"
+                ],
                 "summary": "Search products by name, description or price",
                 "parameters": [
                     {
@@ -119,6 +125,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "/api/products"
+                ],
                 "summary": "Get product by ID",
                 "parameters": [
                     {
@@ -152,6 +161,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "/api/products"
+                ],
                 "summary": "Delete a product",
                 "parameters": [
                     {
@@ -184,6 +196,9 @@ const docTemplate = `{
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "/api/products"
                 ],
                 "summary": "Update a product",
                 "parameters": [

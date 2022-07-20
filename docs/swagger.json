@@ -40,6 +40,9 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "/api/products"
+                ],
                 "summary": "Create a new product",
                 "parameters": [
                     {
@@ -77,6 +80,9 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "/api/products"
+                ],
                 "summary": "Search products by name, description or price",
                 "parameters": [
                     {
@@ -112,6 +118,9 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "/api/products"
+                ],
                 "summary": "Get product by ID",
                 "parameters": [
                     {
@@ -145,6 +154,9 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "/api/products"
+                ],
                 "summary": "Delete a product",
                 "parameters": [
                     {
@@ -177,6 +189,9 @@
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "/api/products"
                 ],
                 "summary": "Update a product",
                 "parameters": [

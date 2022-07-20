@@ -93,6 +93,8 @@ paths:
           schema:
             $ref: '#/definitions/models.Response'
       summary: Create a new product
+      tags:
+      - /api/products
   /api/products/{id}:
     delete:
       consumes:
@@ -116,6 +118,8 @@ paths:
           schema:
             $ref: '#/definitions/models.Response'
       summary: Delete a product
+      tags:
+      - /api/products
     get:
       consumes:
       - application/json
@@ -138,6 +142,8 @@ paths:
           schema:
             $ref: '#/definitions/models.Response'
       summary: Get product by ID
+      tags:
+      - /api/products
     patch:
       consumes:
       - application/json
@@ -161,6 +167,8 @@ paths:
           schema:
             $ref: '#/definitions/models.Response'
       summary: Update a product
+      tags:
+      - /api/products
   /api/products/s/{query}:
     get:
       consumes:
@@ -184,4 +192,6 @@ paths:
           schema:
             $ref: '#/definitions/models.Response'
       summary: Search products by name, description or price
+      tags:
+      - /api/products
 swagger: "2.0"
