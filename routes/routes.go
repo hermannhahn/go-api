@@ -13,15 +13,16 @@ import (
 // HandleRequests is a function that handles all requests
 func HandleRequests() {
 	database.Connect()
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/*")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	r.GET("/", controllers.ShowIndex)
-	r.GET("/products", controllers.ShowProducts)
-	r.GET("/products/s/:query", controllers.SearchProducts)
-	r.GET("/products/:id", controllers.ShowProduct)
-	r.POST("/products", controllers.CreateProduct)
-	r.DELETE("/products/:id", controllers.DeleteProduct)
-	r.PATCH("/products/:id", controllers.UpdateProduct)
+	r.GET("/api", controllers.ShowIndex)
+	r.GET("/api/products", controllers.ShowProducts)
+	r.GET("/api/products/s/:query", controllers.SearchProducts)
+	r.GET("/api/products/:id", controllers.ShowProduct)
+	r.POST("/api/products", controllers.CreateProduct)
+	r.DELETE("/api/products/:id", controllers.DeleteProduct)
+	r.PATCH("/api/products/:id", controllers.UpdateProduct)
 	r.Run(":8080")
 }

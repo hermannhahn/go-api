@@ -18,6 +18,9 @@ import (
 // @host localhost:8080
 // @BasePath /
 func main() {
+	println("Starting API...")
+	println("Swagger documentation: http://localhost:8080/swagger/")
+	println("API documentation: http://localhost:8080/api/")
 	docs.SwaggerInfo.BasePath = "/"
 	routes.HandleRequests()
 }
