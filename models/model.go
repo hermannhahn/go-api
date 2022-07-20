@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// Configuration is the configuration for the database application
+// Configuration for the database application
 type Configuration struct {
 	DbUsername string
 	DbPassword string
@@ -25,16 +25,16 @@ type Product struct {
 	Active      bool    `json:"active"`
 }
 
-// Products is a slice of Product
-type Products []Product // slice of products
+// Products struct
+type Products []Product
 
-// Response is the response for the API
+// Response struct
 type Response struct {
 	Message string  `json:"message"`
 	Data    Product `json:"data"`
 }
 
-// ResponseList is the response list for the API
+// ResponseList struct
 type ResponseList struct {
 	Message string   `json:"message"`
 	Data    Products `json:"data"`

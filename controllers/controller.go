@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @BasePath /products
+// @BasePath /api/products
 
 // ShowProducts godoc
 // @Summary List all products

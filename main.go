@@ -1,4 +1,3 @@
-// dev: github.com/hermannhahn
 package main
 
 import (
@@ -16,11 +15,11 @@ import (
 // @contact.email hermann.h.hahn@gmail.com
 
 // @host localhost:8080
-// @BasePath /
+// @BasePath /api
 func main() {
 	println("Starting API...")
 	println("Swagger documentation: http://localhost:8080/swagger/")
-	println("API documentation: http://localhost:8080/api/")
+	println("API: http://localhost:8080/api/")
 	docs.SwaggerInfo.BasePath = "/"
 	routes.HandleRequests()
 	println("API started.")
