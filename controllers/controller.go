@@ -21,7 +21,7 @@ import (
 // @Router /products [get]
 func ShowProducts(c *gin.Context) {
 	docs.SwaggerInfo.BasePath = "/products"
-	products := models.Product{}
+	products := models.Products{}
 	database.DB.Find(&products)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Returning all products",
