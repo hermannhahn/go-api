@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"go-api-gin/database"
-	"go-api-gin/docs"
-	"go-api-gin/models"
+	"github.com/hermannhahn/go-api-gin/database"
+	"github.com/hermannhahn/go-api-gin/docs"
+	"github.com/hermannhahn/go-api-gin/models"
 
 	"net/http"
 

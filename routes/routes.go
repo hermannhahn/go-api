@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"go-api-gin/controllers"
-	"go-api-gin/database"
+	"github.com/hermannhahn/go-api-gin/controllers"
+	"github.com/hermannhahn/go-api-gin/database"
 
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

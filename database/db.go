@@ -5,7 +5,8 @@ import (
 	"gorm.io/gorm"
 
 	"fmt"
-	"go-api-gin/models"
+
+	"github.com/hermannhahn/go-api-gin/models"
 
 	"github.com/tkanos/gonfig"
 )
@@ -42,16 +43,4 @@ func Connect() {
 	}
 	con.AutoMigrate(&models.Product{})
 	DB = con
-}
-
-// CreateProduct creates a product
-func CreateProduct(product models.Product) {
-	DB.Create(&product)
-}
-
-// GetProducts returns all products
-func GetProducts() []models.Product {
-	var products []models.Product
-	DB.Find(&products)
-	return products
 }

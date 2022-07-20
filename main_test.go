@@ -3,15 +3,15 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"go-api-gin/controllers"
-	"go-api-gin/database"
-	"go-api-gin/models"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hermannhahn/go-api-gin/controllers"
+	"github.com/hermannhahn/go-api-gin/database"
+	"github.com/hermannhahn/go-api-gin/models"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -1,4 +1,4 @@
-module go-api-gin
+module github.com/hermannhahn/go-api-gin
 
 go 1.18
 

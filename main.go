@@ -1,9 +1,9 @@
 package main
 
 import (
-	"go-api-gin/routes"
+	"github.com/hermannhahn/go-api-gin/routes"
 
-	docs "go-api-gin/docs"
+	docs "github.com/hermannhahn/go-api-gin/docs"
 )
 
 // @title Simple Rest API
