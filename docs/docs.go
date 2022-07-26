@@ -90,7 +90,7 @@ const docTemplate = `{
                 "tags": [
                     "/api/products"
                 ],
-                "summary": "Search products by name, description or price",
+                "summary": "Search products by name, description, category or price",
                 "parameters": [
                     {
                         "type": "string",
@@ -104,13 +104,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Response"
+                            "$ref": "#/definitions/models.ResponseList"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.Response"
+                            "$ref": "#/definitions/models.ResponseList"
                         }
                     }
                 }
@@ -248,6 +248,9 @@ const docTemplate = `{
                 "active": {
                     "type": "boolean"
                 },
+                "category": {
+                    "type": "string"
+                },
                 "createdAt": {
                     "type": "string"
                 },
@@ -309,7 +312,7 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "localhost:8080",
-	BasePath:         "/",
+	BasePath:         "/api",
 	Schemes:          []string{},
 	Title:            "Simple Rest API",
 	Description:      "This is a sample product store database api.",

@@ -11,7 +11,7 @@
         "version": "1.0"
     },
     "host": "localhost:8080",
-    "basePath": "/",
+    "basePath": "/api",
     "paths": {
         "/api/products": {
             "get": {
@@ -83,7 +83,7 @@
                 "tags": [
                     "/api/products"
                 ],
-                "summary": "Search products by name, description or price",
+                "summary": "Search products by name, description, category or price",
                 "parameters": [
                     {
                         "type": "string",
@@ -97,13 +97,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Response"
+                            "$ref": "#/definitions/models.ResponseList"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.Response"
+                            "$ref": "#/definitions/models.ResponseList"
                         }
                     }
                 }
@@ -240,6 +240,9 @@
             "properties": {
                 "active": {
                     "type": "boolean"
+                },
+                "category": {
+                    "type": "string"
                 },
                 "createdAt": {
                     "type": "string"

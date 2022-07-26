@@ -58,8 +58,8 @@ func ShowProduct(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param query path string true "Search term"
-// @Success 200 {object} models.Response
-// @Failure 400 {object} models.Response
+// @Success 200 {object} models.ResponseList
+// @Failure 400 {object} models.ResponseList
 // @Router /api/products/s/{query} [get]
 func SearchProducts(c *gin.Context) {
 	products := models.Products{}

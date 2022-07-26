@@ -26,7 +26,7 @@ type Product struct {
 	gorm.Model
 	Name        string  `json:"name" validate:"nonzero"`
 	Description string  `json:"description"`
-	Category    int     `json:"category" validate:"nonzero"`
+	Category    string  `json:"category" validate:"nonzero"`
 	Image       string  `json:"image" validate:"regexp=^(http|https):\\/\\/.*$"`
 	Price       float64 `json:"price" validate:"nonzero"`
 	Quantity    int     `json:"quantity"`

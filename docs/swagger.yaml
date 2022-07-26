@@ -1,4 +1,4 @@
-basePath: /
+basePath: /api
 definitions:
   gorm.DeletedAt:
     properties:
@@ -12,6 +12,8 @@ definitions:
     properties:
       active:
         type: boolean
+      category:
+        type: string
       createdAt:
         type: string
       deletedAt:
@@ -186,12 +188,12 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Response'
+            $ref: '#/definitions/models.ResponseList'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/models.Response'
-      summary: Search products by name, description or price
+            $ref: '#/definitions/models.ResponseList'
+      summary: Search products by name, description, category or price
       tags:
       - /api/products
 swagger: "2.0"
