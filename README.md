@@ -1,6 +1,6 @@
 # go-api
 
-Simple Rest API to learn Go Lang.
+Simple Rest API with Go.
 
 # RUN
 docker-compose up
