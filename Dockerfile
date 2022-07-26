@@ -1,5 +1,5 @@
 # install backend dependencies and build
-FROM golang:latest
+FROM golang:1.18.4
 WORKDIR /app
 
 # pre-copy/cache go.mod for pre-downloading dependencies and only redownloading them in subsequent builds if they change

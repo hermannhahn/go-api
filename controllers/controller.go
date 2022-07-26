@@ -22,6 +22,7 @@ import (
 func ShowProducts(c *gin.Context) {
 	docs.SwaggerInfo.BasePath = "/products"
 	products := models.Products{}
+	database.Connect()
 	database.DB.Find(&products)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Returning all products",
@@ -41,6 +42,7 @@ func ShowProducts(c *gin.Context) {
 func ShowProduct(c *gin.Context) {
 	var product models.Product
 	id := c.Param("id")
+	database.Connect()
 	database.DB.First(&product, id)
 	if product.ID == 0 {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
@@ -64,6 +66,7 @@ func ShowProduct(c *gin.Context) {
 func SearchProducts(c *gin.Context) {
 	products := models.Products{}
 	search := c.Param("query")
+	database.Connect()
 	database.DB.Where("name, description, category, price LIKE ?", "%"+search+"%").Find(&products)
 	if len(products) == 0 {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
@@ -94,6 +97,7 @@ func CreateProduct(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	database.Connect()
 	database.DB.Create(&product)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "New product created",
@@ -113,6 +117,7 @@ func CreateProduct(c *gin.Context) {
 func DeleteProduct(c *gin.Context) {
 	var product models.Product
 	id := c.Param("id")
+	database.Connect()
 	database.DB.First(&product, id)
 	if product.ID == 0 {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
@@ -137,6 +142,7 @@ func DeleteProduct(c *gin.Context) {
 func UpdateProduct(c *gin.Context) {
 	var product models.Product
 	id := c.Param("id")
+	database.Connect()
 	database.DB.First(&product, id)
 	if err := c.ShouldBindJSON(&product); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

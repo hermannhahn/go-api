@@ -1,6 +1,8 @@
 package database
 
 import (
+	"os"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
@@ -15,14 +17,6 @@ var (
 	err error
 )
 
-// DBConfig returns the configuration for the database
-func DBConfig() models.Configuration {
-	configuration := models.Configuration{}
-	fileName := "db_config.json"
-	gonfig.GetConf(fileName, &configuration)
-	return configuration
-}
-
 // APIConfig returns the configuration for the API
 func APIConfig() models.APIConfiguration {
 	configuration := models.APIConfiguration{}
@@ -33,12 +27,18 @@ func APIConfig() models.APIConfiguration {
 
 // Connect returns a connection to the database
 func Connect() {
-	config := DBConfig()
-	dsn := "host=" + config.DbHost + " user=" + config.DbUsername + " password=" + config.DbPassword + " dbname=" + config.DbName + " port=" + config.DbPort + " sslmode=disable"
-	con, err := gorm.Open(postgres.Open(dsn))
+	user := string(os.Getenv("POSTGRES_USER"))
+	password := string(os.Getenv("POSTGRES_PASSWORD"))
+	host := string(os.Getenv("POSTGRES_HOST"))
+	port := string(os.Getenv("POSTGRES_PORT"))
+	dbname := string(os.Getenv("POSTGRES_DB"))
+
+	dsn := "host=" + host + " user=" + user + " password=" + password + " dbname=" + dbname + " port=" + port + " sslmode=disable"
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
-	con.AutoMigrate(&models.Product{})
-	DB = con
+
+	db.AutoMigrate(&models.Product{})
+	DB = db
 }

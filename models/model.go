@@ -7,11 +7,12 @@ import (
 
 // Configuration for the database application
 type Configuration struct {
-	DbUsername string
-	DbPassword string
-	DbPort     string
-	DbHost     string
-	DbName     string
+	DbUser    string
+	DbPass    string
+	DbPort    string
+	DbHost    string
+	DbName    string
+	DbSSLMode string
 }
 
 // APIConfiguration for the API application

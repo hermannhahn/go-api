@@ -1,17 +1,14 @@
 {
+    "produces": [
+        "application/json"
+    ],
+    "schemes": [
+        "http"
+    ],
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample product store database api.",
-        "title": "Simple Rest API",
-        "contact": {
-            "name": "Hermann Hahn",
-            "url": "https://github.com/hermannhahn/go-api",
-            "email": "hermann.h.hahn@gmail.com"
-        },
-        "version": "1.0"
+        "contact": {}
     },
-    "host": "localhost:8080",
-    "basePath": "/api",
     "paths": {
         "/api/products": {
             "get": {
@@ -297,6 +294,13 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "my-api-key": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }

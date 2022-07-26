@@ -1,31 +1,29 @@
 version: '3'
 services:
-  go-api-postgres:
-    image: "postgres"
-    container_name: go-api-postgres
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=go-api
-    ports:
-      - "5432:5432"
-    networks:
-      - bridge
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data  
 
   go-api:
-    image: golang:latest
-    container_name: go-api
+    image: go-api
     build: ./
     ports:
       - 8080:8080
     networks:
-      - bridge
+      - go-network
     volumes:
       - ./:/go-api
     depends_on:
-      - go-api-postgres
+      - postgres
+
+  postgres:
+    image: postgres
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    networks:
+      - go-network      
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data  
 
 networks:
-  bridge:
+  go-network:
+    driver: bridge

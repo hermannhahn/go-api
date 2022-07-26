@@ -2,7 +2,6 @@ package routes
 
 import (
 	"github.com/hermannhahn/go-api/controllers"
-	"github.com/hermannhahn/go-api/database"
 	"github.com/hermannhahn/go-api/middleware"
 
 	swaggerfiles "github.com/swaggo/files"
@@ -13,18 +12,25 @@ import (
 
 // HandleRequests is a function that handles all requests
 func HandleRequests() {
-	database.Connect()
 	gin.SetMode(gin.DebugMode)
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/index.html")
-	r.Use(middleware.Authorization(), middleware.CORS())
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	r.GET("/api", controllers.ShowIndex)
-	r.GET("/api/products", controllers.ShowProducts)
-	r.GET("/api/products/s/:query", controllers.SearchProducts)
-	r.GET("/api/products/:id", controllers.ShowProduct)
-	r.POST("/api/products", controllers.CreateProduct)
-	r.DELETE("/api/products/:id", controllers.DeleteProduct)
-	r.PATCH("/api/products/:id", controllers.UpdateProduct)
+
+	api := r.Group("/api")
+	{
+		api.GET("/api", controllers.ShowIndex)
+		api.Use(middleware.Authorization(), middleware.CORS())
+		products := api.Group("/products")
+		{
+			products.GET("", controllers.ShowProducts)
+			products.GET("/s/:query", controllers.SearchProducts)
+			products.GET("/:id", controllers.ShowProduct)
+			products.POST("", controllers.CreateProduct)
+			products.DELETE("/:id", controllers.DeleteProduct)
+			products.PATCH("/:id", controllers.UpdateProduct)
+		}
+	}
+
 	r.Run(":8080")
 }
