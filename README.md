@@ -1,4 +1,4 @@
-# go-api-gin
+# go-api
 
 Simple Rest API to learn Go Lang.
 
