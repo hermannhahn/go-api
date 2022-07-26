@@ -27,3 +27,5 @@ services:
     depends_on:
       - go-api-postgres
 
+networks:
+  bridge:
