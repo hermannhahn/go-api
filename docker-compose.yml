@@ -1,19 +1,5 @@
 version: '3'
 services:
-  go-api:
-    image: golang:latest
-    container_name: go-api
-    build: ./
-    ports:
-      - 8080:8080
-    networks:
-      - frontend
-      - backend
-    volumes:
-      - ./:/go-api
-    depends_on:
-      - go-api-postgres
-
   go-api-postgres:
     image: "postgres"
     container_name: go-api-postgres
@@ -24,10 +10,20 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - backend
+      - bridge
     volumes:
       - ./postgres-data:/var/lib/postgresql/data  
 
-networks:
-  frontend:
-  backend:
+  go-api:
+    image: golang:latest
+    container_name: go-api
+    build: ./
+    ports:
+      - 8080:8080
+    networks:
+      - bridge
+    volumes:
+      - ./:/go-api
+    depends_on:
+      - go-api-postgres
+
