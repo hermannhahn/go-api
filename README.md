@@ -2,9 +2,14 @@
 
 Simple Rest API to learn Go Lang.
 
-# Install
-1. Rename db_config.example.json to db_config.json
-2. docker-compose up
+# RUN
+docker-compose up
 
 # Swagger
 http://localhost:8080/swagger/index.html
+
+# API
+GET http://localhost:8080/api/products
+GET http://localhost:8080/api/products/{$id}
+PATCH http://localhost:8080/api/products/{$id}
+DELETE http://localhost:8080/api/products
