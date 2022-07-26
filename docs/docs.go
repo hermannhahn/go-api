@@ -12,7 +12,7 @@ const docTemplate = `{
         "title": "{{.Title}}",
         "contact": {
             "name": "Hermann Hahn",
-            "url": "https://github.com/hermannhahn/go-api-gin",
+            "url": "https://github.com/hermannhahn/go-api",
             "email": "hermann.h.hahn@gmail.com"
         },
         "version": "{{.Version}}"

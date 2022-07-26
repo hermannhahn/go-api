@@ -52,7 +52,7 @@ info:
   contact:
     email: hermann.h.hahn@gmail.com
     name: Hermann Hahn
-    url: https://github.com/hermannhahn/go-api-gin
+    url: https://github.com/hermannhahn/go-api
   description: This is a sample product store database api.
   title: Simple Rest API
   version: "1.0"

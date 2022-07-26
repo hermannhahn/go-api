@@ -1,9 +1,9 @@
 package routes
 
 import (
-	"github.com/hermannhahn/go-api-gin/controllers"
-	"github.com/hermannhahn/go-api-gin/database"
-	"github.com/hermannhahn/go-api-gin/middleware"
+	"github.com/hermannhahn/go-api/controllers"
+	"github.com/hermannhahn/go-api/database"
+	"github.com/hermannhahn/go-api/middleware"
 
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

@@ -4,7 +4,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
-	"github.com/hermannhahn/go-api-gin/models"
+	"github.com/hermannhahn/go-api/models"
 
 	"github.com/tkanos/gonfig"
 )

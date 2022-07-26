@@ -1,22 +1,33 @@
 version: '3'
 services:
-  postgres:
+  go-api:
+    image: golang:latest
+    container_name: go-api
+    build: ./
+    ports:
+      - 8080:8080
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - ./:/go-api
+    depends_on:
+      - go-api-postgres
+
+  go-api-postgres:
     image: "postgres"
+    container_name: go-api-postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=go-api
     ports:
       - "5432:5432"
+    networks:
+      - backend
     volumes:
       - ./postgres-data:/var/lib/postgresql/data  
 
-  pgadmin-compose:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "example@example.com"
-      PGADMIN_DEFAULT_PASSWORD: "123456"
-    ports:
-      - "54321:80"
-    depends_on:
-      - postgres
+networks:
+  frontend:
+  backend:

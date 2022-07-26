@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hermannhahn/go-api-gin/database"
+	"github.com/hermannhahn/go-api/database"
 )
 
 // Authorization is a middleware that validates the authentication
@@ -33,7 +33,7 @@ func CORS() gin.HandlerFunc {
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(http.StatusNoContent)
 		}
-		if c.Request.Header.Get("Origin") != database.APIConfig().Domain+":"+database.APIConfig().Port {
+		if c.Request.Header.Get("Origin") != database.APIConfig().Address+":"+database.APIConfig().Port {
 			c.AbortWithStatus(http.StatusUnauthorized)
 		}
 		// Hand over to the next middleware

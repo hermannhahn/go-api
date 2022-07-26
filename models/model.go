@@ -16,9 +16,9 @@ type Configuration struct {
 
 // APIConfiguration for the API application
 type APIConfiguration struct {
-	APIKey string
-	Domain string
-	Port   string
+	APIKey  string
+	Address string
+	Port    string
 }
 
 // Product struct
@@ -26,6 +26,7 @@ type Product struct {
 	gorm.Model
 	Name        string  `json:"name" validate:"nonzero"`
 	Description string  `json:"description"`
+	Category    int     `json:"category" validate:"nonzero"`
 	Image       string  `json:"image" validate:"regexp=^(http|https):\\/\\/.*$"`
 	Price       float64 `json:"price" validate:"nonzero"`
 	Quantity    int     `json:"quantity"`

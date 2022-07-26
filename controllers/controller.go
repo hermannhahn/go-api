@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"github.com/hermannhahn/go-api-gin/database"
-	"github.com/hermannhahn/go-api-gin/docs"
-	"github.com/hermannhahn/go-api-gin/models"
+	"github.com/hermannhahn/go-api/database"
+	"github.com/hermannhahn/go-api/docs"
+	"github.com/hermannhahn/go-api/models"
 
 	"net/http"
 
@@ -52,7 +52,7 @@ func ShowProduct(c *gin.Context) {
 }
 
 // SearchProducts godoc
-// @Summary Search products by name, description or price
+// @Summary Search products by name, description, category or price
 // @Description returns message and a list of products
 // @Tags /api/products
 // @Accept json
@@ -64,16 +64,10 @@ func ShowProduct(c *gin.Context) {
 func SearchProducts(c *gin.Context) {
 	products := models.Products{}
 	search := c.Param("query")
-	database.DB.Where("name LIKE ?", "%"+search+"%").Find(&products)
+	database.DB.Where("name, description, category, price LIKE ?", "%"+search+"%").Find(&products)
 	if len(products) == 0 {
-		database.DB.Where("description LIKE ?", "%"+search+"%").Find(&products)
-		if len(products) == 0 {
-			database.DB.Where("price LIKE ?", "%"+search+"%").Find(&products)
-			if len(products) == 0 {
-				c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
-				return
-			}
-		}
+		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
+		return
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Returning results in a slice of products",
@@ -161,7 +155,7 @@ func UpdateProduct(c *gin.Context) {
 // ShowIndex is the index page
 func ShowIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{
-		"title":   "Gin web framework",
-		"welcome": "Welcome to the Go API GIN!",
+		"title":   "Go API",
+		"welcome": "Welcome to the Go API!",
 	})
 }
