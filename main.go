@@ -1,38 +1,28 @@
 package main
 
 import (
-	"github.com/hermannhahn/go-api/routes"
-
 	docs "github.com/hermannhahn/go-api/docs"
+	"github.com/hermannhahn/go-api/routes"
 )
 
-// @title			Simple Rest API
-// @version			1.1
-// @description		This is a sample rest api for golang
-// @termsOfService	http://swagger.io/terms/
+// @BasePath /api
+// @host localhost:8080
 
-// @contact.name	API Support
-// @contact.url		https://github.com/hermannhahn/go-api
-// @contact.email	hermann.h.hahn@gmail.com
+// @title Simple Rest API
+// @version 1.1
+// @description This is a simple rest api with golang
 
-// @license.name	Apache 2.0
-// @license.url		http://www.apache.org/licenses/LICENSE-2.0.html
+// @contact.name API Support
+// @contact.url https://github.com/hermannhahn/go-api
+// @contact.email hermann.h.hahn@gmail.com
+// @termsOfService http://swagger.io/terms/
 
-// @host			localhost:8080
-// @BasePath		/api
-
-// @Schemes 		http
-// @Produce 		json
-// @Consume 		json
-
-// @securityDefinitions.apikey  my-api-key
-// @in                          header
-// @name                        Authorization
-// @description					API Key Authentication
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 func main() {
 	println("API: http://localhost:8080/api/")
 	println("Swagger documentation: http://localhost:8080/swagger/")
 	println("API started.")
-	docs.SwaggerInfo.BasePath = "/"
+	docs.SwaggerInfo.BasePath = "/api"
 	routes.HandleRequests()
 }

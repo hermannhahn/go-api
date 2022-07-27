@@ -6,27 +6,33 @@ import "github.com/swaggo/swag"
 
 const docTemplate = `{
     "schemes": {{ marshal .Schemes }},
-    "produces": [
-        "application/json"
-    ],
     "swagger": "2.0",
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "https://github.com/hermannhahn/go-api",
+            "email": "hermann.h.hahn@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/products": {
+        "/products": {
             "get": {
                 "description": "returns message and a list of products",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "List all products",
                 "responses": {
@@ -47,7 +53,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "Create a new product",
                 "parameters": [
@@ -77,7 +83,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/products/s/{query}": {
+        "/products/s/{query}": {
             "get": {
                 "description": "returns message and a list of products",
                 "consumes": [
@@ -87,7 +93,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "Search products by name, description, category or price",
                 "parameters": [
@@ -115,7 +121,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/products/{id}": {
+        "/products/{id}": {
             "get": {
                 "description": "returns message and a product",
                 "consumes": [
@@ -125,7 +131,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "Get product by ID",
                 "parameters": [
@@ -161,7 +167,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "Delete a product",
                 "parameters": [
@@ -197,7 +203,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "Update a product",
                 "parameters": [
@@ -304,24 +310,17 @@ const docTemplate = `{
                 }
             }
         }
-    },
-    "securityDefinitions": {
-        "my-api-key": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
-	Schemes:          []string{"http"},
-	Title:            "",
-	Description:      "",
+	Version:          "1.1",
+	Host:             "localhost:8080",
+	BasePath:         "/api",
+	Schemes:          []string{},
+	Title:            "Simple Rest API",
+	Description:      "This is a simple rest api with golang",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

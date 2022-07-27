@@ -7,8 +7,6 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/hermannhahn/go-api/models"
-
-	"github.com/tkanos/gonfig"
 )
 
 // DB is the database connection
@@ -16,14 +14,6 @@ var (
 	DB  *gorm.DB
 	err error
 )
-
-// APIConfig returns the configuration for the API
-func APIConfig() models.APIConfiguration {
-	configuration := models.APIConfiguration{}
-	fileName := "api_config.json"
-	gonfig.GetConf(fileName, &configuration)
-	return configuration
-}
 
 // Connect returns a connection to the database
 func Connect() {

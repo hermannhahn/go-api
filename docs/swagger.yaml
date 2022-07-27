@@ -1,3 +1,4 @@
+basePath: /api
 definitions:
   gorm.DeletedAt:
     properties:
@@ -48,10 +49,21 @@ definitions:
       message:
         type: string
     type: object
+host: localhost:8080
 info:
-  contact: {}
+  contact:
+    email: hermann.h.hahn@gmail.com
+    name: API Support
+    url: https://github.com/hermannhahn/go-api
+  description: This is a simple rest api with golang
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Simple Rest API
+  version: "1.1"
 paths:
-  /api/products:
+  /products:
     get:
       description: returns message and a list of products
       produces:
@@ -63,7 +75,7 @@ paths:
             $ref: '#/definitions/models.ResponseList'
       summary: List all products
       tags:
-      - /api/products
+      - /products
     post:
       consumes:
       - application/json
@@ -88,8 +100,8 @@ paths:
             $ref: '#/definitions/models.Response'
       summary: Create a new product
       tags:
-      - /api/products
-  /api/products/{id}:
+      - /products
+  /products/{id}:
     delete:
       consumes:
       - application/json
@@ -113,7 +125,7 @@ paths:
             $ref: '#/definitions/models.Response'
       summary: Delete a product
       tags:
-      - /api/products
+      - /products
     get:
       consumes:
       - application/json
@@ -137,7 +149,7 @@ paths:
             $ref: '#/definitions/models.Response'
       summary: Get product by ID
       tags:
-      - /api/products
+      - /products
     patch:
       consumes:
       - application/json
@@ -162,8 +174,8 @@ paths:
             $ref: '#/definitions/models.Response'
       summary: Update a product
       tags:
-      - /api/products
-  /api/products/s/{query}:
+      - /products
+  /products/s/{query}:
     get:
       consumes:
       - application/json
@@ -187,14 +199,5 @@ paths:
             $ref: '#/definitions/models.ResponseList'
       summary: Search products by name, description, category or price
       tags:
-      - /api/products
-produces:
-- application/json
-schemes:
-- http
-securityDefinitions:
-  my-api-key:
-    in: header
-    name: Authorization
-    type: apiKey
+      - /products
 swagger: "2.0"

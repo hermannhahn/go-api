@@ -3,9 +3,12 @@ services:
 
   go-api:
     image: go-api
+    container_name: go-api
+    env_file:
+      - .env
     build: ./
     ports:
-      - 8080:8080
+      - "${API_PORT}:${API_PORT}"
     networks:
       - go-network
     volumes:
@@ -15,6 +18,7 @@ services:
 
   postgres:
     image: postgres
+    container_name: postgres
     env_file:
       - .env
     ports:

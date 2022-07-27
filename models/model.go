@@ -17,9 +17,7 @@ type Configuration struct {
 
 // APIConfiguration for the API application
 type APIConfiguration struct {
-	APIKey  string
-	Address string
-	Port    string
+	APIKey string
 }
 
 // Product struct

@@ -8,7 +8,6 @@ require (
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe
 	github.com/swaggo/gin-swagger v1.5.1
 	github.com/swaggo/swag v1.8.4
-	github.com/tkanos/gonfig v0.0.0-20210106201359-53e13348de2f
 	gopkg.in/validator.v2 v2.0.1
 	gorm.io/driver/postgres v1.3.8
 	gorm.io/gorm v1.23.8
@@ -17,7 +16,6 @@ require (
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
 	github.com/go-openapi/jsonreference v0.20.0 // indirect

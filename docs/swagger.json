@@ -1,23 +1,31 @@
 {
-    "produces": [
-        "application/json"
-    ],
-    "schemes": [
-        "http"
-    ],
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "This is a simple rest api with golang",
+        "title": "Simple Rest API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "https://github.com/hermannhahn/go-api",
+            "email": "hermann.h.hahn@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.1"
     },
+    "host": "localhost:8080",
+    "basePath": "/api",
     "paths": {
-        "/api/products": {
+        "/products": {
             "get": {
                 "description": "returns message and a list of products",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "List all products",
                 "responses": {
@@ -38,7 +46,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "Create a new product",
                 "parameters": [
@@ -68,7 +76,7 @@
                 }
             }
         },
-        "/api/products/s/{query}": {
+        "/products/s/{query}": {
             "get": {
                 "description": "returns message and a list of products",
                 "consumes": [
@@ -78,7 +86,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "Search products by name, description, category or price",
                 "parameters": [
@@ -106,7 +114,7 @@
                 }
             }
         },
-        "/api/products/{id}": {
+        "/products/{id}": {
             "get": {
                 "description": "returns message and a product",
                 "consumes": [
@@ -116,7 +124,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "Get product by ID",
                 "parameters": [
@@ -152,7 +160,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "Delete a product",
                 "parameters": [
@@ -188,7 +196,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "/api/products"
+                    "/products"
                 ],
                 "summary": "Update a product",
                 "parameters": [
@@ -294,13 +302,6 @@
                     "type": "string"
                 }
             }
-        }
-    },
-    "securityDefinitions": {
-        "my-api-key": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
         }
     }
 }
