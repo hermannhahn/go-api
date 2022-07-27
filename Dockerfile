@@ -2,13 +2,13 @@
 FROM golang:1.18.4
 WORKDIR /app
 
-RUN echo  ██████╗  ██████╗      █████╗ ██████╗ ██╗
-RUN echo ██╔════╝ ██╔═══██╗    ██╔══██╗██╔══██╗██║
-RUN echo ██║  ███╗██║   ██║    ███████║██████╔╝██║
-RUN echo ██║   ██║██║   ██║    ██╔══██║██╔═══╝ ██║
-RUN echo ╚██████╔╝╚██████╔╝    ██║  ██║██║     ██║
-RUN echo  ╚═════╝  ╚═════╝     ╚═╝  ╚═╝╚═╝     ╚═╝
-RUN echo "Version 1.1 >>> Developed by Hermann Hahn"
+LABEL   ██████╗  ██████╗      █████╗ ██████╗ ██╗
+LABEL  ██╔════╝ ██╔═══██╗    ██╔══██╗██╔══██╗██║
+LABEL  ██║  ███╗██║   ██║    ███████║██████╔╝██║
+LABEL  ██║   ██║██║   ██║    ██╔══██║██╔═══╝ ██║
+LABEL  ╚██████╔╝╚██████╔╝    ██║  ██║██║     ██║
+LABEL   ╚═════╝  ╚═════╝     ╚═╝  ╚═╝╚═╝     ╚═╝
+LABEL  "Version 1.1 >>> Developed by Hermann Hahn"
 
 # pre-copy/cache go.mod for pre-downloading dependencies and only redownloading them in subsequent builds if they change
 RUN echo "Installing dependencies..."
