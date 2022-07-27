@@ -1,4 +1,4 @@
-# go-api
+# GO-API
 
 Simple example of Rest API with Go.
 
