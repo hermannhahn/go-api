@@ -19,7 +19,7 @@ func HandleRequests() {
 
 	api := r.Group("/api")
 	{
-		api.GET("/api", controllers.ShowIndex)
+		api.GET("", controllers.ShowIndex)
 		api.Use(middleware.Authorization(), middleware.CORS())
 		products := api.Group("/products")
 		{
