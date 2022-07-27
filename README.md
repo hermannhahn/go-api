@@ -9,8 +9,8 @@ docker-compose up
 http://localhost:8080/swagger/index.html
 
 # BUILD
-To compile file changes:
+To compile file changes:<br>
 docker-compose up --build
 
-# API-KEY
+## API-KEY
 To use Autorization header you need to set your API_KEY in .env file and change DEBUG to false
