@@ -34,6 +34,7 @@ func CORS() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Add CORS headers
 		c.Header("Access-Control-Allow-Methods", "PATCH, POST, GET, DELETE")
+		c.Header("Authorization", "apiKey")
 		// Stop here if its a OPTIONS request
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(http.StatusNoContent)
