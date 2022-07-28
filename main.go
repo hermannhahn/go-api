@@ -1,11 +1,12 @@
 package main
 
 import (
-	"os"
-
 	docs "github.com/hermannhahn/go-api/docs"
 	"github.com/hermannhahn/go-api/routes"
 )
+
+var version string
+var buildDate string
 
 // @BasePath /api
 // @host localhost:8080
@@ -22,17 +23,19 @@ import (
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 func main() {
+	println("")
 	println("   ██████╗  ██████╗      █████╗ ██████╗ ██╗ ")
 	println("  ██╔════╝ ██╔═══██╗    ██╔══██╗██╔══██╗██║ ")
 	println("  ██║  ███╗██║   ██║    ███████║██████╔╝██║ ")
 	println("  ██║   ██║██║   ██║    ██╔══██║██╔═══╝ ██║ ")
 	println("  ╚██████╔╝╚██████╔╝    ██║  ██║██║     ██║ ")
 	print("   ╚═════╝  ╚═════╝     ╚═╝  ╚═╝╚═╝     ╚═╝ ")
-	println(os.Getenv("API_VERSION"))
-
+	println(version)
+	println("Build Date: ", buildDate)
+	println("")
 	println("API: http://localhost:8080/api/")
 	println("Swagger documentation: http://localhost:8080/swagger/")
-	println("API started.")
+	println("")
 	docs.SwaggerInfo.BasePath = "/api"
 	routes.HandleRequests()
 }
