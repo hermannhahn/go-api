@@ -23,7 +23,7 @@ RUN swag init --parseDependency --parseInternal
 RUN echo "Building API..."
 RUN --mount=type=cache,target=/root/.cache/go-build \
     go build -o /go/bin/ \
-    -ldflags "-X main.version=$(git rev-parse HEAD) -X main.buildDate=$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+    -ldflags "-X main.version=$(git rev-parse HEAD) -X main.buildDate=$(date -u +'%d-%m-%Y|%H:%M:%SZ')"
 
 # deploy the app
 CMD go-api
