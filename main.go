@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	docs "github.com/hermannhahn/go-api/docs"
 	"github.com/hermannhahn/go-api/routes"
 )
@@ -31,10 +33,10 @@ func main() {
 	println("  ╚██████╔╝╚██████╔╝    ██║  ██║██║     ██║ ")
 	print("   ╚═════╝  ╚═════╝     ╚═╝  ╚═╝╚═╝     ╚═╝ ")
 	println(version)
-	println("Build Date: ", buildDate)
 	println("")
-	println("API: http://localhost:8080/api/")
-	println("Swagger documentation: http://localhost:8080/swagger/")
+	println("Last build:", buildDate)
+	println("API: http://localhost:" + string(os.Getenv("API_PORT")) + "/api/")
+	println("Swagger documentation: http://localhost:" + string(os.Getenv("API_PORT")) + "/swagger/")
 	println("")
 	docs.SwaggerInfo.BasePath = "/api"
 	routes.HandleRequests()

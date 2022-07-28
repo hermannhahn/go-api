@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"os"
+
 	"github.com/hermannhahn/go-api/controllers"
 	"github.com/hermannhahn/go-api/middleware"
 
@@ -12,16 +14,21 @@ import (
 
 // HandleRequests is a function that handles all requests
 func HandleRequests() {
-	gin.SetMode(gin.DebugMode)
-	r := gin.Default()
+	debug := os.Getenv("DEBUG")
+	if debug == "true" {
+		gin.SetMode(gin.DebugMode)
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+	}
+	r := gin.New()
 	r.LoadHTMLGlob("templates/index.html")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	api := r.Group("/api")
 	{
 		api.GET("", controllers.ShowIndex)
-		api.Use(middleware.Authorization(), middleware.CORS())
 		products := api.Group("/products")
+		products.Use(middleware.Authorization(), middleware.CORS(), gin.Recovery(), gin.Logger())
 		{
 			products.GET("", controllers.ShowProducts)
 			products.GET("/s/:query", controllers.SearchProducts)
@@ -32,5 +39,5 @@ func HandleRequests() {
 		}
 	}
 
-	r.Run(":8080")
+	r.Run(":" + string(os.Getenv("API_PORT")))
 }

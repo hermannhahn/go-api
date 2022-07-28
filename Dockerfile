@@ -6,7 +6,7 @@ WORKDIR /app
 #  ██║  ███╗██║   ██║    ███████║██████╔╝██║
 #  ██║   ██║██║   ██║    ██╔══██║██╔═══╝ ██║
 #  ╚██████╔╝╚██████╔╝    ██║  ██║██║     ██║
-#   ╚═════╝  ╚═════╝     ╚═╝  ╚═╝╚═╝     ╚═╝ v0.1.1-alpha
+#   ╚═════╝  ╚═════╝     ╚═╝  ╚═╝╚═╝     ╚═╝ 
 
 # pre-copy/cache go.mod for pre-downloading dependencies and only redownloading them in subsequent builds if they change
 RUN echo "Installing dependencies..."
@@ -23,7 +23,7 @@ RUN swag init --parseDependency --parseInternal
 RUN echo "Building API..."
 RUN --mount=type=cache,target=/root/.cache/go-build \
     go build -o /go/bin/ \
-    -ldflags "-X main.version=$(git rev-parse HEAD) -X main.buildDate=$(date -u +'%d-%m-%Y|%H:%M:%SZ')"
+    -ldflags "-X main.version=$(git tag) -X main.buildDate=$(date -u +'%d-%m-%Y|%H:%M:%S')"
 
 # deploy the app
 CMD go-api
