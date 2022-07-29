@@ -4,7 +4,9 @@ services:
   app:
     env_file:
       - .env
-    build: ./
+    build:
+      context: ./
+      dockerfile: Dockerfile.prod
     ports:
       - "${API_PORT}:${API_PORT}"
     networks:

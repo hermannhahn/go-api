@@ -15,7 +15,6 @@ RUN go mod download && go mod verify && go mod tidy
 
 # build the app
 COPY . ./
-RUN export PORT=~/go/bin
 RUN echo "Installing swagger..."
 RUN go install github.com/swaggo/swag/cmd/swag@latest
 RUN echo "Generating swagger files..."
