@@ -2,6 +2,7 @@ version: '3'
 services:
 
   app:
+    image: hahndev/go-api:latest
     env_file:
       - .env
     build:
@@ -18,6 +19,10 @@ services:
       - db
     links:
       - db
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
   db:
     image: postgres
@@ -29,6 +34,10 @@ services:
       - backend      
     volumes:
       - data:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
 networks:
   backend:
