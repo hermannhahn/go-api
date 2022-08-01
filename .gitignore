@@ -20,3 +20,4 @@ docs/
 .notes
 .devcontainer
 .env
+*.env
