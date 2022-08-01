@@ -1,0 +1,42 @@
+version: '3'
+services:
+
+  app:
+    image: hahndev/go-api:latest
+    env_file:
+      - .env
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - app:/app
+    depends_on:
+      - db
+    links:
+      - db
+
+  db:
+    image: postgres
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    networks:
+      - backend   
+    volumes:
+      - data:/data
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
+
+volumes:
+  app:
+  data:
