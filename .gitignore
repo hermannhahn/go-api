@@ -18,3 +18,5 @@ postgres-data/
 migration/
 docs/
 .notes
+.devcontainer
+.env
