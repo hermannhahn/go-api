@@ -1,5 +1,5 @@
 # GO-API
-Simple example of Rest API with Go.
+Simple Rest API example with Go.
 
 ## RUN
 docker-compose up

@@ -8,13 +8,13 @@ import (
 // Product struct
 type Product struct {
 	gorm.Model
-	Name        string         `json:"name" validate:"nonzero"`
-	Description string         `json:"description"`
-	Category    string         `json:"category" validate:"nonzero"`
-	Images      []ProductImage `json:"images"`
-	Price       float64        `json:"price" validate:"nonzero"`
-	Quantity    int            `json:"quantity"`
-	Active      bool           `json:"active"`
+	Name        string          `json:"name" validate:"nonzero"`
+	Description string          `json:"description"`
+	Category    []Category      `json:"category" validate:"nonzero"`
+	Images      []ProductImages `json:"images"`
+	Price       float64         `json:"price" validate:"nonzero"`
+	Quantity    int             `json:"quantity"`
+	Active      bool            `json:"active"`
 }
 
 // Category struct
@@ -25,11 +25,11 @@ type Category struct {
 	CategoryImages []CategoryImage `json:"category_images"`
 }
 
-// ProductImage struct
-type ProductImage struct {
+// ProductImages struct
+type ProductImages struct {
 	gorm.Model
 	ProductID uint   `json:"product_id"`
-	Image     string `json:"image" validate:"regexp=^(http|https):\\/\\/.*$"`
+	Image     string `json:"image"`
 }
 
 // CategoryImage struct

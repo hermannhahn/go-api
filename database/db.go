@@ -35,6 +35,6 @@ func Connect() {
 	}
 
 	// Create the database tables if they don't exist
-	db.AutoMigrate(&models.Product{}, &models.Category{}, &models.CategoryImage{}, &models.ProductImage{})
+	db.AutoMigrate(&models.Product{}, &models.Category{}, &models.CategoryImage{}, &models.ProductImages{})
 	DB = db
 }
