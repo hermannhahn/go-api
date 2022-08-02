@@ -19,11 +19,11 @@ var (
 func Connect() {
 
 	// Get database connection details from environment variables
-	user := string(os.Getenv("POSTGRES_USER"))
-	password := string(os.Getenv("POSTGRES_PASSWORD"))
-	host := string(os.Getenv("POSTGRES_HOST"))
-	port := string(os.Getenv("POSTGRES_PORT"))
-	dbname := string(os.Getenv("POSTGRES_DB"))
+	user := string(os.Getenv("DATABASE_USER"))
+	password := string(os.Getenv("DATABASE_PASSWORD"))
+	host := string(os.Getenv("DATABASE_HOST"))
+	port := string(os.Getenv("DATABASE_PORT"))
+	dbname := string(os.Getenv("DATABASE_DB"))
 
 	// Create connection string
 	dsn := "host=" + host + " user=" + user + " password=" + password + " dbname=" + dbname + " port=" + port + " sslmode=disable"

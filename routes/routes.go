@@ -14,8 +14,6 @@ import (
 
 // HandleRequests is a function that handles all requests
 func HandleRequests() {
-	// set environment variables
-	os.Setenv("API_PORT", "8080")
 
 	// Get debug mode from environment variable
 	debug := os.Getenv("DEBUG")
@@ -29,6 +27,8 @@ func HandleRequests() {
 
 	// Create a new gin router
 	r := gin.New()
+
+	r.SetTrustedProxies([]string{os.Getenv("TRUSTED_PROXIES")})
 
 	// Create APP index page
 	r.LoadHTMLGlob("templates/index.html")
