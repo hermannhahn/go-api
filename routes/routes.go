@@ -48,22 +48,15 @@ func HandleRequests() {
 		// Create a new middleware handler for API
 		api.Use(middleware.Authorization(), middleware.CORS(), gin.Recovery(), gin.Logger())
 
-		// Create route group for products
+		// route: /api/products
 		products := api.Group("/products")
-
 		{
-			// Show all products
-			products.GET("", controllers.ShowProducts)
-			// Search for a product
-			products.GET("/s/:query", controllers.SearchProducts)
-			// Show a single product
-			products.GET("/:id", controllers.ShowProduct)
-			// Create a new product
-			products.POST("", controllers.CreateProduct)
-			// Delete a product
-			products.DELETE("/:id", controllers.DeleteProduct)
-			// Update a product
-			products.PATCH("/:id", controllers.UpdateProduct)
+			products.GET("", controllers.ShowProducts)            // Show all products
+			products.GET("/s/:query", controllers.SearchProducts) // Search for a product
+			products.GET("/:id", controllers.ShowProduct)         // Show a single product
+			products.POST("", controllers.CreateProduct)          // Create a new product
+			products.DELETE("/:id", controllers.DeleteProduct)    // Delete a product
+			products.PATCH("/:id", controllers.UpdateProduct)     // Update a product
 		}
 	}
 

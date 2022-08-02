@@ -2,6 +2,7 @@ version: '3'
 services:
 
   app:
+    image: hahndev/go-api:latest
     env_file:
       - .env
     build: ./
