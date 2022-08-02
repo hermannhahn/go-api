@@ -12,4 +12,4 @@ To compile file changes:<br>
 docker-compose up --build
 
 ### API-KEY
-To use Autorization header you need to set your API_KEY in .env file and change DEBUG to false
+To use authorization header you need to set your API KEY in .env file and change DEBUG to false
