@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"os"
+
 	"github.com/hermannhahn/go-api/database"
 	"github.com/hermannhahn/go-api/models"
 
@@ -8,6 +10,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
+
+// DON'T CHANGE FUNCTION COMMENTS IF YOU DON'T KNOW WHAT YOU ARE DOING. IT'S USED BY SWAGGER TO GENERATE DOCUMENTATION.
+// SWAGGER DOCUMENTATION: https://github.com/swaggo/gin-swagger
 
 // @BasePath /api
 
@@ -168,7 +173,6 @@ func UpdateProduct(c *gin.Context) {
 // ShowIndex is the index page
 func ShowIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{
-		"title":   "Go API",
-		"welcome": "Welcome to the Go API!",
+		"title": os.Getenv("APP_NAME"),
 	})
 }

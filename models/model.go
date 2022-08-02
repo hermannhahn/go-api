@@ -5,21 +5,6 @@ import (
 	"gorm.io/gorm"
 )
 
-// Configuration for the database application
-type Configuration struct {
-	DbUser    string
-	DbPass    string
-	DbPort    string
-	DbHost    string
-	DbName    string
-	DbSSLMode string
-}
-
-// APIConfiguration for the API application
-type APIConfiguration struct {
-	APIKey string
-}
-
 // Product struct
 type Product struct {
 	gorm.Model

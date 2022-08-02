@@ -38,6 +38,7 @@ func main() {
 	println("API: http://localhost:" + string(os.Getenv("API_PORT")) + "/api/")
 	println("Swagger documentation: http://localhost:" + string(os.Getenv("API_PORT")) + "/swagger/")
 	println("")
+	println("API is running...")
 	docs.SwaggerInfo.BasePath = "/api"
 	routes.HandleRequests()
 }

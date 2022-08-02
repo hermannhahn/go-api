@@ -6,10 +6,11 @@ RUN go mod download && go mod verify && go mod tidy
 COPY . ./
 RUN go install github.com/swaggo/swag/cmd/swag@latest
 RUN swag init --parseDependency --parseInternal
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags "-X main.version=$(git tag) -X main.buildDate=$(date -u +'%d-%m-%Y|%H:%M:%S')" -o app .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags "-X main.version=$(git tag) -X main.buildDate=$(date -u +'%d-%m-%Y|%H:%M:%S')" -o go-api .
 
 FROM alpine:latest  
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
+EXPOSE 8080
 COPY --from=0 /go/src/github.com/hermannhahn/go-api/ ./
-CMD ["./app"]
+CMD ["./go-api"]
