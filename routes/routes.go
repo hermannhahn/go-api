@@ -28,7 +28,7 @@ func HandleRequests() {
 	// Create a new gin router
 	r := gin.New()
 
-	r.SetTrustedProxies([]string{os.Getenv("TRUSTED_PROXIES")})
+	r.SetTrustedProxies([]string{os.Getenv("API_TRUSTED_PROXIES")})
 
 	// Create APP index page
 	r.LoadHTMLGlob("templates/index.html")
