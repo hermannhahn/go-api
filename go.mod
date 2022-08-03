@@ -11,6 +11,7 @@ require (
 	gopkg.in/validator.v2 v2.0.1
 	gorm.io/driver/postgres v1.3.8
 	gorm.io/gorm v1.23.8
+	github.com/joho/godotenv v1.4.0
 )
 
 require (
@@ -35,7 +36,6 @@ require (
 	github.com/jackc/pgx/v4 v4.16.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
