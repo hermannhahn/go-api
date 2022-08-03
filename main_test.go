@@ -69,7 +69,7 @@ func SearchTestProduct(t *testing.T) {
 func ShowTestProducts(t *testing.T) {
 	// Try get list of products
 	r := SetupTestRoutes()
-	r.GET("/products", controllers.ShowProducts)
+	r.GET("/products", controllers.GetProducts)
 	req, _ := http.NewRequest("GET", "/products", nil)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
@@ -82,7 +82,7 @@ func ShowTestProducts(t *testing.T) {
 func ShowTestProduct(t *testing.T) {
 	// Try get the product
 	r := SetupTestRoutes()
-	r.GET("/products/:id", controllers.ShowProduct)
+	r.GET("/products/:id", controllers.GetProduct)
 	req, _ := http.NewRequest("GET", "/products/"+ID, nil)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
