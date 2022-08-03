@@ -37,7 +37,7 @@ func TestAPI(t *testing.T) {
 
 func CreateTestProduct(t *testing.T) {
 	// Create a new product for testing
-	product := models.Product{Name: "TestProduct", Description: "TestDescription", Category: []models.Category{}, Price: 1.1, Quantity: 1, Images: []models.ProductImages{}, Active: true}
+	product := models.Product{CategoryID: 1, Name: "TestProduct", Description: "TestDescription", Price: 1.1, Quantity: 1, Active: true}
 	newProduct, _ := json.Marshal(product)
 	r := SetupTestRoutes()
 	r.POST("/products", controllers.CreateProduct)

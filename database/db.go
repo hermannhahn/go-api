@@ -18,6 +18,10 @@ var (
 // Connect returns a connection to the database
 func Connect() {
 
+	// .env file is used to store the database credentials
+	// if the file doesn't exist, the connection will be made to the localhost
+	// database with the default credentials
+
 	// Get database connection details from environment variables
 	user := string(os.Getenv("POSTGRES_USER"))
 	password := string(os.Getenv("POSTGRES_PASSWORD"))
@@ -29,12 +33,11 @@ func Connect() {
 	dsn := "host=" + host + " user=" + user + " password=" + password + " dbname=" + dbname + " port=" + port + " sslmode=disable"
 
 	// Create a new database connection
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
 
 	// Create the database tables if they don't exist
-	db.AutoMigrate(&models.Product{}, &models.Category{}, &models.CategoryImage{}, &models.ProductImages{})
-	DB = db
+	DB.AutoMigrate(&models.Product{}, &models.Category{})
 }

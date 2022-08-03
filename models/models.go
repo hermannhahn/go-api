@@ -8,35 +8,31 @@ import (
 // Product struct
 type Product struct {
 	gorm.Model
-	Name        string          `json:"name" validate:"nonzero"`
-	Description string          `json:"description"`
-	Category    []Category      `json:"category" validate:"nonzero"`
-	Images      []ProductImages `json:"images"`
-	Price       float64         `json:"price" validate:"nonzero"`
-	Quantity    int             `json:"quantity"`
-	Active      bool            `json:"active"`
+	CategoryID  uint    `json:"category_id"`
+	Name        string  `json:"name" validate:"nonzero"`
+	Description string  `json:"description"`
+	Price       float64 `json:"price" validate:"nonzero"`
+	Quantity    int     `json:"quantity"`
+	Active      bool    `json:"active"`
 }
 
 // Category struct
 type Category struct {
 	gorm.Model
-	Name           string          `json:"name" validate:"nonzero"`
-	Description    string          `json:"description"`
-	CategoryImages []CategoryImage `json:"category_images"`
+	Parent      uint   `json:"parent"`
+	Name        string `json:"name" validate:"nonzero"`
+	Description string `json:"description"`
+	Image       string `json:"image" validate:"regexp=^(http|https):\\/\\/.*$"`
 }
 
-// ProductImages struct
-type ProductImages struct {
+// Categories struct
+type Categories []Category
+
+// Image struct
+type Image struct {
 	gorm.Model
 	ProductID uint   `json:"product_id"`
-	Image     string `json:"image"`
-}
-
-// CategoryImage struct
-type CategoryImage struct {
-	gorm.Model
-	CategoryID uint   `json:"category_id"`
-	Image      string `json:"image" validate:"regexp=^(http|https):\\/\\/.*$"`
+	Image     string `json:"image" validate:"regexp=^(http|https):\\/\\/.*$"`
 }
 
 // Products struct

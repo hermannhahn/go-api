@@ -2,7 +2,6 @@ version: '3'
 services:
 
   app:
-    image: hahndev/go-api:latest
     env_file:
       - .env
     build: ./
@@ -31,7 +30,7 @@ services:
     networks:
       - backend
     volumes:
-      - data:/data
+      - data:/var/lib/postgresql/data
     deploy:
       replicas: 1
       restart_policy:

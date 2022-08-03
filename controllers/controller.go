@@ -57,7 +57,7 @@ func ShowProduct(c *gin.Context) {
 }
 
 // SearchProducts godoc
-// @Summary Search products by name, description, category or price
+// @Summary Search products by name, description or price
 // @Description returns message and a list of products
 // @Tags /products
 // @Accept json
@@ -71,21 +71,30 @@ func SearchProducts(c *gin.Context) {
 	search := c.Param("query")
 	database.Connect()
 	database.DB.Where("name LIKE ?", "%"+search+"%").Find(&products)
-	if len(products) == 0 {
-		database.DB.Where("description LIKE ?", "%"+search+"%").Find(&products)
-		if len(products) == 0 {
-			database.DB.Where("category LIKE ?", "%"+search+"%").Find(&products)
-			if len(products) == 0 {
-				database.DB.Where("price LIKE ?", "%"+search+"%").Find(&products)
-				if len(products) == 0 {
-					c.JSON(http.StatusNotFound, gin.H{"error": "Product(s) not found"})
-					return
-				}
-			}
-		}
-	}
+	database.DB.Where("description LIKE ?", "%"+search+"%").Find(&products)
+	database.DB.Where("price LIKE ?", "%"+search+"%").Find(&products)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Returning results for search term: " + search,
+		"data":    products})
+}
+
+// SearchProductsByCategory godoc
+// @Summary Search products by category
+// @Description returns message and a list of products
+// @Tags /products
+// @Accept json
+// @Produce json
+// @Param category path string true "Category"
+// @Success 200 {object} models.ResponseList
+// @Failure 400 {object} models.ResponseList
+// @Router /products/category/{category} [get]
+func SearchProductsByCategory(c *gin.Context) {
+	products := models.Products{}
+	categoryID := c.Param("id")
+	database.Connect()
+	database.DB.Where("category_id LIKE ?", categoryID).Find(&products)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Returning results for category: " + getCategoryName(categoryID),
 		"data":    products})
 }
 
@@ -175,4 +184,12 @@ func ShowIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"title": os.Getenv("APP_NAME"),
 	})
+}
+
+func getCategoryName(id string) string {
+	// getCategoryName returns the name of a category [not working]
+	category := models.Category{}
+	database.Connect()
+	database.DB.First(&category, id)
+	return category.Name
 }

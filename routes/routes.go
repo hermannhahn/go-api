@@ -57,6 +57,13 @@ func HandleRequests() {
 			products.POST("", controllers.CreateProduct)          // Create a new product
 			products.DELETE("/:id", controllers.DeleteProduct)    // Delete a product
 			products.PATCH("/:id", controllers.UpdateProduct)     // Update a product
+
+		}
+
+		// route: /api/category
+		category := api.Group("/category")
+		{
+			category.GET("/:id", controllers.SearchProductsByCategory) // Search for a product by category
 		}
 	}
 
